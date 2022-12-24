@@ -35,7 +35,7 @@ pub fn write(tokens: TokenStream) -> TokenStream {
     TokenStream::new()
 }
 
-#[proc_macro]
-pub fn skip(_: TokenStream) -> TokenStream {
+#[proc_macro_attribute]
+pub fn skip(_attr: TokenStream, _item: TokenStream) -> TokenStream {
     TokenStream::new()
 }

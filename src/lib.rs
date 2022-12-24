@@ -15,7 +15,7 @@ struct Write {
 impl Parse for Write {
     fn parse(input: ParseStream) -> Result<Self> {
         type Inner = Punctuated<LitStr, Comma>;
-        let mut args = Inner::parse_terminated(input)?.into_iter().collect::<Vec<_>>();
+        let args = Inner::parse_terminated(input)?.into_iter().collect::<Vec<_>>();
         let filename = args[0].value().into();
         let content = args.get(1).map(|s| s.value());
         Ok(Self {
@@ -32,5 +32,10 @@ pub fn write(tokens: TokenStream) -> TokenStream {
         fs::create_dir_all(parent).expect("Failed to create parent directory.");
     }
     fs::write(write.filename, write.content.unwrap_or_default()).expect("Failed to write file.");
+    TokenStream::new()
+}
+
+#[proc_macro]
+pub fn skip(_: TokenStream) -> TokenStream {
     TokenStream::new()
 }

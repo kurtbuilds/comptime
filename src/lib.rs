@@ -1,10 +1,12 @@
 use std::fs;
 use std::path::PathBuf;
 use proc_macro::TokenStream;
+use quote::quote;
 use syn::token::Comma;
 use syn::punctuated::Punctuated;
 use syn::parse::{Parse, ParseStream};
 use syn::{parse_macro_input, Result, LitStr};
+use syn::ItemFn;
 
 
 struct Write {
